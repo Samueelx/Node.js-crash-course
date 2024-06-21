@@ -1,0 +1,4 @@
+GET /api/users
+GET /api/users/2
+GET /api/users/1
+GET /api/users/9

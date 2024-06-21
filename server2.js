@@ -1,4 +1,5 @@
 import { createServer } from "http";
+import fs from 'fs/promises';
 const PORT = process.env.PORT;
 
 const users = [
@@ -7,9 +8,18 @@ const users = [
     { id: 3, name: "Patrick Swayze" }
 ];
 
+const log = async(req) => {
+    try {
+        await fs.appendFile('./log.txt', `${req.method} ${req.url}\n`);
+    } catch (error) {
+        console.log(err);
+    }
+}
+
 /**Logger Middleware */
 const logger = (req, res, next) => {
-    console.log(`${req.method}  ${req.url}`);
+    // console.log(`${req.method}  ${req.url}`);
+    log(req);
     next();
 }
 /**JSON Middleware */
